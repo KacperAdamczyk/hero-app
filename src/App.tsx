@@ -10,6 +10,7 @@ import { HeroesList } from 'pages';
 
 const Container = styled.div`
   background-color: ${colors.background};
+  box-sizing: border-box;
   min-height: 100vh;
   padding: 15px 70px;
 `;

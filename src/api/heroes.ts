@@ -1,16 +1,20 @@
 import { gql } from 'apollo-boost';
 
 export interface HeroesParams {
-  skip?: number;
+  first?: number;
+  skip: number;
 }
 
 export const HEROES = gql`
-  {
-    heroes(first: 8, skip: $skip) {
+  query Heroes($first: Int = 8, $skip: Int!) {
+    heroes(first: $first, skip: $skip) {
       id
       full_name
       avatar_url
       description
+      type {
+        name
+      }
     }
   }
 `;

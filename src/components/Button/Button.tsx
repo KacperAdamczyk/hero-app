@@ -38,9 +38,12 @@ export const Button: FC<Props> = ({
     css={css`
       && {
         text-transform: none;
-        color: ${color === ButtonColor.primary ? 'white' : colorMap[color]};
+        color: ${variant === ButtonVariant.contained
+          ? 'white'
+          : colorMap[color]};
         font-weight: bold;
-        height: 42px;
+        height: 40px;
+        border-radius: 8px;
       }
     `}
     color={color}

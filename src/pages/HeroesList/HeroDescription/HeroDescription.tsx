@@ -1,5 +1,5 @@
 /** @jsx jsx */
-import { Fragment, FC } from 'react';
+import { FC } from 'react';
 import { jsx, css } from '@emotion/core';
 
 import { Avatar } from 'components';

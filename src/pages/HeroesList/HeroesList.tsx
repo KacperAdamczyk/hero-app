@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { Fragment, FC } from 'react';
 import { jsx, css } from '@emotion/core';
-import { useQuery } from '@apollo/react-hooks';
 
 import { List, Layout } from 'components';
 import { Hero } from 'interfaces';
@@ -17,16 +16,29 @@ const layout: Layout<Hero>[] = [
       <HeroDescription avatarUrl={avatar_url} name={full_name} />
     ),
   },
+  {
+    header: 'Type',
+    space: 25,
+    content: ({ type: { name } }) => <div>{name}</div>,
+  },
+  {
+    header: 'Description',
+    space: 45,
+    content: ({ description }) => (
+      <div
+        css={css`
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        `}
+      >
+        {description}
+      </div>
+    ),
+  },
 ];
 
 export const HeroesList: FC = () => {
-  const { loading, error, data, fetchMore } = useQuery<
-    {
-      heroes: Hero[];
-    },
-    HeroesParams
-  >(HEROES, { variables: { skip: 0 } });
-
   return (
     <Fragment>
       <ActionButtons
@@ -34,7 +46,11 @@ export const HeroesList: FC = () => {
           margin-bottom: 15px;
         `}
       />
-      {!!data?.heroes && <List layout={layout} data={data?.heroes} />}
+      <List<Hero, HeroesParams>
+        layout={layout}
+        query={HEROES}
+        dataField={'heroes'}
+      />
     </Fragment>
   );
 };

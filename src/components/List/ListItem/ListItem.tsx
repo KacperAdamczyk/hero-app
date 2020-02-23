@@ -1,5 +1,6 @@
 import React, { FC, PropsWithChildren, useCallback } from 'react';
 import styled from '@emotion/styled';
+
 import { Layout } from '../List';
 
 interface Props<T> {
@@ -9,7 +10,7 @@ interface Props<T> {
 }
 
 const Container = styled.div`
-  padding: 20px 0;
+  min-height: 75px;
   width: 100%;
   background-color: white;
   border-radius: 5px;
@@ -23,15 +24,17 @@ interface CellProps {
 }
 
 const Cell = styled.div<CellProps>`
-  flex-grow: ${({ space }) => space};
+  flex: ${({ space }) => space};
+  max-width: ${({ space }) => space}%;
   box-sizing: border-box;
+  padding: 0 5px;
 
   &:first-of-type {
-    padding-left: 15px;
+    padding-left: 20px;
   }
 
   &:last-of-type {
-    padding-right: 15px;
+    padding-right: 20px;
   }
 `;
 

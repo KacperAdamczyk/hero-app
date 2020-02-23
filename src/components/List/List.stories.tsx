@@ -2,6 +2,8 @@
 import { ReactNode } from 'react';
 import { jsx, css } from '@emotion/core';
 import { action } from '@storybook/addon-actions';
+import { gql } from 'apollo-boost';
+import { MockedProvider } from '@apollo/react-testing';
 
 import { List } from './List';
 import { Layout } from '../List';
@@ -28,6 +30,7 @@ export interface Data {
   name: string;
   type: string;
   age: number;
+  __typename?: string;
 }
 
 const data: Data[] = [
@@ -36,18 +39,21 @@ const data: Data[] = [
     name: 'Foo',
     type: 'Type 1',
     age: 42,
+    __typename: 'Hero',
   },
   {
     id: '2',
     name: 'Bar',
     type: 'Type 2',
     age: 43,
+    __typename: 'Hero',
   },
   {
     id: '3',
     name: 'Baz',
     type: 'Type 3',
     age: 44,
+    __typename: 'Hero',
   },
 ];
 
@@ -69,6 +75,36 @@ const layout: Layout<Data>[] = [
   },
 ];
 
+const QUERY = gql`
+  query Data {
+    data {
+      id
+      name
+      type
+      age
+    }
+  }
+`;
+
+const mocks = [
+  {
+    request: {
+      query: QUERY,
+      variables: { skip: 0 },
+    },
+    result: {
+      data: { data },
+    },
+  },
+];
+
 export const Default = () => (
-  <List data={data} layout={layout} onClick={action('onClick')} />
+  <MockedProvider mocks={mocks}>
+    <List<Data>
+      query={QUERY}
+      dataField={'data'}
+      layout={layout}
+      onClick={action('onClick')}
+    />
+  </MockedProvider>
 );
