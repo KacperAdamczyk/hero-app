@@ -2,6 +2,7 @@ import React, { FC, PropsWithChildren, useCallback } from 'react';
 import styled from '@emotion/styled';
 
 import { Layout } from '../List';
+import { media } from 'styling';
 
 interface Props<T> {
   data: T;
@@ -10,13 +11,20 @@ interface Props<T> {
 }
 
 const Container = styled.div`
+  display: flex;
+  box-sizing: border-box;
   min-height: 75px;
+  padding: 20px 0;
   width: 100%;
   background-color: white;
   border-radius: 5px;
-  display: flex;
   align-items: center;
   cursor: pointer;
+
+  ${media.small} {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 `;
 
 interface CellProps {
@@ -35,6 +43,19 @@ const Cell = styled.div<CellProps>`
 
   &:last-of-type {
     padding-right: 20px;
+  }
+
+  ${media.small} {
+    padding-bottom: 20px;
+
+    &:first-of-type {
+      padding-right: 20px;
+    }
+
+    &:last-of-type {
+      padding-left: 20px;
+      padding-bottom: 0;
+    }
   }
 `;
 

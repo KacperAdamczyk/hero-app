@@ -2,33 +2,18 @@
 import { FC } from 'react';
 import { jsx, css } from '@emotion/core';
 
-import { Avatar } from 'components';
-
 interface Props {
-  avatarUrl: string;
-  name: string;
+  description: string;
 }
 
-export const HeroDescription: FC<Props> = ({ avatarUrl, name }) => (
+export const HeroDescription: FC<Props> = ({ description }) => (
   <div
     css={css`
-      display: flex;
-      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     `}
   >
-    <Avatar
-      css={css`
-        margin-right: 20px;
-      `}
-      url={avatarUrl}
-      size={35}
-    />
-    <div
-      css={css`
-        font-weight: bold;
-      `}
-    >
-      {name}
-    </div>
+    {description}
   </div>
 );

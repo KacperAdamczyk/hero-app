@@ -9,9 +9,10 @@ import styled from '@emotion/styled';
 import { DocumentNode } from 'graphql';
 import { useQuery } from '@apollo/react-hooks';
 
-import { ListItem } from './ListItem';
-import { colors } from 'styling';
 import { Loader, Error } from 'components';
+import { colors } from 'styling';
+import { useSmallDevice } from 'hooks';
+import { ListItem } from './ListItem';
 import { Paginator } from './Paginator';
 
 export interface Layout<T> {
@@ -60,8 +61,8 @@ export const List = <
   mobileLayout,
   onClick,
 }: PropsWithChildren<Props<T>>): ReturnType<FC> => {
-  // const mobileLayout = mobileLayout ?? layout;
-  const currentLayout = layout;
+  const isSmallDevice = useSmallDevice();
+  const currentLayout = isSmallDevice ? mobileLayout ?? layout : layout;
 
   const [morePages, setMorePages] = useState(true);
 
@@ -95,11 +96,9 @@ export const List = <
     });
   }, [fetchMore, dataField, values]);
 
-  const display = !!data?.[dataField];
-
   return (
     <Container>
-      {display && (
+      {!!values && !isSmallDevice && (
         <Headers>
           {currentLayout.map(({ header, space }) => (
             <Header key={header} space={space}>
@@ -118,7 +117,7 @@ export const List = <
           />
         ))}
       </Rows>
-      {!!display && morePages && <Paginator onLoadMore={onLoadMore} />}
+      {!!values && morePages && <Paginator onLoadMore={onLoadMore} />}
       <Loader loading={!error && loading} />
       {!!error && <Error message={error?.message} />}
     </Container>

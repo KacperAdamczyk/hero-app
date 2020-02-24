@@ -90,7 +90,7 @@ const mocks = [
   {
     request: {
       query: QUERY,
-      variables: { skip: 0 },
+      variables: { first: 8, skip: 0 },
     },
     result: {
       data: { data },
