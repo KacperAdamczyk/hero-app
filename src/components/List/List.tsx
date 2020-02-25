@@ -53,7 +53,10 @@ const Header = styled.div<{ space: number }>`
 const pageSize = 8;
 export const List = <
   T extends { id: string },
-  Q extends { first?: number; skip: number } = { first?: number; skip: number }
+  Q extends { first?: number | null; skip: number } = {
+    first?: number | null;
+    skip: number;
+  }
 >({
   query,
   dataField,

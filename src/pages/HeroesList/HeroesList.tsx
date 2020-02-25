@@ -4,14 +4,13 @@ import { jsx, css } from '@emotion/core';
 import { Routes, Route } from 'react-router-dom';
 
 import { List, Layout } from 'components';
-import { Hero } from 'interfaces';
 import { AddHero } from 'pages';
-import { HEROES, HeroesParams } from 'api';
+import { HEROES, Heroes_heroes, HeroesVariables } from 'api';
 import { ActionButtons } from './ActionButtons';
 import { HeroInfo } from './HeroInfo';
 import { HeroDescription } from './HeroDescription';
 
-const layout: Layout<Hero>[] = [
+const layout: Layout<Heroes_heroes>[] = [
   {
     header: 'Heroes',
     space: 30,
@@ -31,7 +30,7 @@ const layout: Layout<Hero>[] = [
   },
 ];
 
-const mobileLayout: Layout<Hero>[] = [
+const mobileLayout: Layout<Heroes_heroes>[] = [
   {
     header: 'Heroes',
     space: 100,
@@ -54,7 +53,7 @@ export const HeroesList: FC = () => {
           margin-bottom: 15px;
         `}
       />
-      <List<Hero, HeroesParams>
+      <List<Heroes_heroes, HeroesVariables>
         layout={layout}
         mobileLayout={mobileLayout}
         query={HEROES}

@@ -34,7 +34,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "apollo:download": "yarn apollo client:download-schema",
+    "apollo:codegen": "yarn apollo client:codegen --target typescript"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -58,6 +60,8 @@
     "@storybook/addons": "^5.3.13",
     "@storybook/preset-create-react-app": "^1.5.2",
     "@storybook/react": "^5.3.13",
+    "apollo": "^2.23.0",
+    "apollo-codegen": "^0.20.2",
     "prettier": "^1.19.1"
   },
   "prettier": {
