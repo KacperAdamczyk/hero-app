@@ -18,7 +18,7 @@ export const Error: FC<Props> = ({ message }) => (
       border-radius: 10px;
     `}
   >
-    <ErrorOutlineIcon color={'error'} />
+    <ErrorOutlineIcon color="error" />
     <h4
       css={css`
         color: red;

@@ -1,7 +1,12 @@
 import React, { FC } from 'react';
 import styled from '@emotion/styled';
 import { ThemeProvider } from '@material-ui/core';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 
 import { colors, theme, media } from 'styling';
@@ -29,7 +34,8 @@ export const App: FC = () => (
       <Router>
         <Container>
           <Routes>
-            <Route path="/" element={<HeroesList />} />
+            <Route path="heroes/*" element={<HeroesList />} />
+            <Redirect from="/" to="heroes" />
           </Routes>
         </Container>
       </Router>

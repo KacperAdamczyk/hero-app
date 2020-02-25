@@ -1,13 +1,15 @@
 /** @jsx jsx */
 import { Fragment, FC } from 'react';
 import { jsx, css } from '@emotion/core';
+import { Routes, Route } from 'react-router-dom';
 
 import { List, Layout } from 'components';
 import { Hero } from 'interfaces';
+import { AddHero } from 'pages';
+import { HEROES, HeroesParams } from 'api';
 import { ActionButtons } from './ActionButtons';
 import { HeroInfo } from './HeroInfo';
 import { HeroDescription } from './HeroDescription';
-import { HEROES, HeroesParams } from 'api';
 
 const layout: Layout<Hero>[] = [
   {
@@ -56,8 +58,11 @@ export const HeroesList: FC = () => {
         layout={layout}
         mobileLayout={mobileLayout}
         query={HEROES}
-        dataField={'heroes'}
+        dataField="heroes"
       />
+      <Routes>
+        <Route path="add" element={<AddHero />} />
+      </Routes>
     </Fragment>
   );
 };

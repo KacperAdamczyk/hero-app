@@ -73,7 +73,6 @@ export const List = <
     notifyOnNetworkStatusChange: true,
     variables: { first: pageSize, skip: 0 } as Q,
   });
-
   const values = data?.[dataField];
 
   const onLoadMore = useCallback(() => {
