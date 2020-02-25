@@ -1,5 +1,6 @@
 import React from 'react';
-import { boolean } from '@storybook/addon-knobs';
+import { boolean, text } from '@storybook/addon-knobs';
+import { action } from '@storybook/addon-actions';
 
 import { Modal } from './Modal';
 
@@ -10,6 +11,11 @@ export default {
 
 export const Default = () => {
   const isOpen = boolean('isOpen', false);
+  const header = text('header', 'Modal header');
 
-  return <Modal isOpen={isOpen}>foo</Modal>;
+  return (
+    <Modal isOpen={isOpen} header={header} onClose={action('onClose')}>
+      Lorem ipsum dolor sit amet
+    </Modal>
+  );
 };

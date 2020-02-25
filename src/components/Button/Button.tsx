@@ -4,6 +4,7 @@ import { jsx, css } from '@emotion/core';
 import UIButton from '@material-ui/core/Button';
 
 import { colors } from 'styling';
+import { Loader } from 'components';
 
 export enum ButtonColor {
   primary = 'primary',
@@ -20,6 +21,9 @@ interface Props {
   variant?: ButtonVariant;
   onClick?: () => void;
   Icon?: FC;
+  disabled?: boolean;
+  loading?: boolean;
+  fullWidth?: boolean;
 }
 
 const colorMap = {
@@ -33,6 +37,9 @@ export const Button: FC<Props> = ({
   variant = ButtonVariant.contained,
   onClick,
   Icon,
+  disabled = false,
+  loading = false,
+  fullWidth = false,
 }) => (
   <UIButton
     css={css`
@@ -44,13 +51,15 @@ export const Button: FC<Props> = ({
         font-weight: bold;
         height: 40px;
         border-radius: 8px;
+        width: ${fullWidth ? '100%' : 'auto'};
       }
     `}
     color={color}
     variant={variant}
     onClick={onClick}
     startIcon={!!Icon && <Icon />}
+    disabled={disabled}
   >
-    {children}
+    {loading ? <Loader loading /> : children}
   </UIButton>
 );

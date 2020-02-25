@@ -14,3 +14,9 @@ export const Default = () => {
 
   return <Avatar url={url} size={size} />;
 };
+
+export const Empty = () => {
+  const size = number('size', 50);
+
+  return <Avatar url="" size={size} />;
+};

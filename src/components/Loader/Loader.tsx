@@ -6,11 +6,11 @@ import BeatLoader from 'react-spinners/BeatLoader';
 import { colors } from 'styling';
 
 interface Props {
-  loading: boolean;
+  loading?: boolean;
   size?: number;
 }
 
-export const Loader: FC<Props> = ({ loading, size = 15 }) => (
+export const Loader: FC<Props> = ({ loading = true, size = 15 }) => (
   <div
     css={css`
       display: flex;
