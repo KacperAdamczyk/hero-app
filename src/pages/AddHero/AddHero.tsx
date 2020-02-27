@@ -1,33 +1,72 @@
 import React, { FC, useCallback } from 'react';
 import { Formik } from 'formik';
+import { object, string } from 'yup';
+import { useQuery, useMutation } from '@apollo/react-hooks';
+import { useNavigate } from 'react-router-dom';
 
 import { Modal } from 'components';
+import {
+  Types,
+  TYPES,
+  Types_types,
+  CREATE_NEW_HERO,
+  CreateNewHero,
+  CreateNewHeroVariables,
+} from 'api';
+import { ContentLoader, Error } from 'components';
 import { AddHeroForm } from './AddHeroForm';
 
+const validationSchema = object().shape({
+  avatarUrl: string()
+    .url()
+    .required(),
+  fullName: string().required(),
+  typeId: string().required(),
+  description: string().required(),
+});
+
 export interface Values {
-  avatar_url: string;
-  full_name: string;
-  type_id?: string;
+  avatarUrl: string;
+  fullName: string;
+  typeId?: string;
   description: string;
 }
 
 export const AddHero: FC = () => {
-  const onSubmit = useCallback(values => {
-    console.log(values);
-  }, []);
+  const { loading: gettingTypes, error: gettingTypesError, data } = useQuery<
+    Types
+  >(TYPES);
+  const [
+    addHero,
+    { loading: creatingHero, error: creatingHeroError },
+  ] = useMutation<CreateNewHero, CreateNewHeroVariables>(CREATE_NEW_HERO);
+
+  const navigate = useNavigate();
+  const onClose = useCallback(() => navigate('/heroes'), [navigate]);
+  const onSubmit = useCallback(
+    values => addHero({ variables: values }).then(onClose, e => console.log(e)),
+    [addHero, onClose],
+  );
 
   return (
-    <Modal isOpen header="Add a hero">
-      <Formik<Values>
-        onSubmit={onSubmit}
-        initialValues={{
-          avatar_url: '',
-          full_name: '',
-          description: '',
-        }}
-      >
-        <AddHeroForm />
-      </Formik>
+    <Modal isOpen header="Add a hero" onClose={onClose}>
+      <ContentLoader loading={gettingTypes} error={gettingTypesError?.message}>
+        <Formik<Values>
+          onSubmit={onSubmit}
+          initialValues={{
+            avatarUrl: '',
+            fullName: '',
+            description: '',
+          }}
+          validationSchema={validationSchema}
+        >
+          <AddHeroForm
+            types={data?.types as Types_types[]}
+            submitting={creatingHero}
+          />
+        </Formik>
+        <Error message={creatingHeroError?.message} />
+      </ContentLoader>
     </Modal>
   );
 };

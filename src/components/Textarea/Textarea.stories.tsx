@@ -1,9 +1,9 @@
 import React from 'react';
 import { text } from '@storybook/addon-knobs';
 import { Formik, Form } from 'formik';
+import { action } from '@storybook/addon-actions';
 
 import { Textarea } from './Textarea';
-import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Textarea',

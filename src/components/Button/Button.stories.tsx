@@ -31,13 +31,17 @@ export const Default = () => {
 };
 
 export const withIcon = () => (
-  <Button onClick={action('onClick')} Icon={AddIcon}>
+  <Button
+    onClick={action('onClick')}
+    Icon={AddIcon}
+    variant={ButtonVariant.contained}
+  >
     I have an icon!
   </Button>
 );
 
 export const withLoader = () => (
-  <Button onClick={action('onClick')} loading>
+  <Button onClick={action('onClick')} variant={ButtonVariant.contained} loading>
     I am loading!
   </Button>
 );

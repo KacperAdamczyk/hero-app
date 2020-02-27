@@ -4,10 +4,13 @@ import React, {
   ReactElement,
   useState,
   useCallback,
+  useEffect,
+  useMemo,
 } from 'react';
 import styled from '@emotion/styled';
 import { DocumentNode } from 'graphql';
 import { useQuery } from '@apollo/react-hooks';
+import { useLocation } from 'react-router-dom';
 
 import { Loader, Error } from 'components';
 import { colors } from 'styling';
@@ -64,25 +67,38 @@ export const List = <
   mobileLayout,
   onClick,
 }: PropsWithChildren<Props<T>>): ReturnType<FC> => {
+  const { state } = useLocation();
   const isSmallDevice = useSmallDevice();
   const currentLayout = isSmallDevice ? mobileLayout ?? layout : layout;
 
   const [morePages, setMorePages] = useState(true);
 
-  const { loading, error, data, fetchMore } = useQuery<
+  const { loading, error, data, refetch, fetchMore } = useQuery<
     { [key: string]: T[] },
     Q
   >(query, {
     notifyOnNetworkStatusChange: true,
     variables: { first: pageSize, skip: 0 } as Q,
   });
-  const values = data?.[dataField];
+
+  const values = useMemo(() => data?.[dataField], [data, dataField]);
+  const valuesLength = values?.length;
+  const shouldRefetch = state?.refetch;
+
+  useEffect(() => {
+    if (shouldRefetch) {
+      refetch({
+        first: pageSize,
+        skip: 0,
+      } as Q);
+    }
+  }, [refetch, shouldRefetch]);
 
   const onLoadMore = useCallback(() => {
     fetchMore({
       variables: {
         first: pageSize,
-        skip: values?.length ?? 0,
+        skip: valuesLength ?? 0,
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         const next = fetchMoreResult?.[dataField] ?? [];
@@ -96,7 +112,7 @@ export const List = <
         };
       },
     });
-  }, [fetchMore, dataField, values]);
+  }, [fetchMore, dataField, valuesLength]);
 
   return (
     <Container>
@@ -121,7 +137,7 @@ export const List = <
       </Rows>
       {!!values && morePages && <Paginator onLoadMore={onLoadMore} />}
       <Loader loading={!error && loading} />
-      {!!error && <Error message={error?.message} />}
+      <Error message={error?.message} />
     </Container>
   );
 };

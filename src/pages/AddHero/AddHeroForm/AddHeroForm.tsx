@@ -1,11 +1,19 @@
 /** @jsx jsx */
-import { Fragment, FC } from 'react';
+import { Fragment, FC, useMemo } from 'react';
 import { jsx, css } from '@emotion/core';
 import styled from '@emotion/styled';
 import { Form, useFormikContext } from 'formik';
 
-import { Avatar, Input, Button, Textarea } from 'components';
+import {
+  Avatar,
+  Input,
+  Button,
+  Select,
+  Textarea,
+  ButtonVariant,
+} from 'components';
 import { media } from 'styling';
+import { Types_types } from 'api';
 import { Values } from '../AddHero';
 
 const Actions = styled.div`
@@ -20,17 +28,29 @@ const Actions = styled.div`
   }
 `;
 
-export const AddHeroForm: FC = () => {
+interface Props {
+  types: Types_types[];
+  submitting: boolean;
+}
+
+export const AddHeroForm: FC<Props> = ({ types, submitting }) => {
   const {
     submitForm,
-    values: { avatar_url },
+    isValid,
+    dirty,
+    values: { avatarUrl },
   } = useFormikContext<Values>();
+
+  const options = useMemo(
+    () => types?.map(({ id, name }) => ({ label: name, value: id })),
+    [types],
+  );
 
   return (
     <Fragment>
       <Avatar
         size={95}
-        url={avatar_url}
+        url={avatarUrl}
         css={css`
           margin-bottom: 20px;
         `}
@@ -45,11 +65,18 @@ export const AddHeroForm: FC = () => {
           }
         `}
       >
-        <Input name="avatar_url" label="Avatar URL" />
-        <Input name="full_name" label="Full name" />
+        <Input name="avatarUrl" label="Avatar URL" />
+        <Input name="fullName" label="Full name" />
+        <Select name="typeId" label="Type" options={options} />
         <Textarea name="description" label="Description" />
         <Actions>
-          <Button onClick={submitForm} fullWidth>
+          <Button
+            variant={ButtonVariant.contained}
+            onClick={submitForm}
+            fullWidth
+            disabled={!isValid || !dirty}
+            loading={submitting}
+          >
             Save
           </Button>
         </Actions>

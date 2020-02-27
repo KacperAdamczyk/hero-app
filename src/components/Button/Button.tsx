@@ -17,7 +17,7 @@ export enum ButtonVariant {
 }
 
 interface Props {
-  color?: ButtonColor;
+  color?: ButtonColor | string;
   variant?: ButtonVariant;
   onClick?: () => void;
   Icon?: FC;
@@ -34,7 +34,7 @@ const colorMap = {
 export const Button: FC<Props> = ({
   children,
   color = ButtonColor.primary,
-  variant = ButtonVariant.contained,
+  variant,
   onClick,
   Icon,
   disabled = false,
@@ -47,14 +47,14 @@ export const Button: FC<Props> = ({
         text-transform: none;
         color: ${variant === ButtonVariant.contained
           ? 'white'
-          : colorMap[color]};
+          : colorMap[color as keyof typeof colorMap] ?? color};
         font-weight: bold;
         height: 40px;
         border-radius: 8px;
         width: ${fullWidth ? '100%' : 'auto'};
       }
     `}
-    color={color}
+    color={ButtonColor[color as ButtonColor] ?? ButtonColor.primary}
     variant={variant}
     onClick={onClick}
     startIcon={!!Icon && <Icon />}

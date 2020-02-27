@@ -1,9 +1,8 @@
 import React, { FC } from 'react';
-import { useField, FieldConfig } from 'formik';
+import { useField, FieldConfig, ErrorMessage } from 'formik';
 import styled from '@emotion/styled';
 
-import { Label } from 'components';
-import { NativeInput } from 'components/Input';
+import { Label, NativeInput, FieldError } from 'components';
 
 const Container = styled.div`
   display: flex;
@@ -32,6 +31,7 @@ export const Textarea: FC<FieldConfig<string> & Props> = ({
     <Container>
       <Label htmlFor={name}>{label}</Label>
       <NativeTextarea id={name} {...field} />
+      <ErrorMessage name={name} component={FieldError} />
     </Container>
   );
 };

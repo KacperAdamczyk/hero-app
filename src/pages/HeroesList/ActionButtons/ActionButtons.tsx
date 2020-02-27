@@ -2,7 +2,7 @@ import React, { FC, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddIcon from '@material-ui/icons/Add';
 
-import { Button } from 'components';
+import { Button, ButtonVariant } from 'components';
 
 interface Props {
   className?: string;
@@ -17,7 +17,11 @@ export const ActionButtons: FC<Props> = props => {
 
   return (
     <div {...props}>
-      <Button Icon={AddIcon} onClick={addHero}>
+      <Button
+        variant={ButtonVariant.contained}
+        Icon={AddIcon}
+        onClick={addHero}
+      >
         Add a hero
       </Button>
     </div>

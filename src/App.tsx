@@ -11,7 +11,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 import { colors, theme, media } from 'styling';
 import { client } from 'api';
-import { HeroesList } from 'pages';
+import { HeroesList, AddHero, HeroDetails } from 'pages';
 
 const Container = styled.div`
   background-color: ${colors.background};
@@ -34,8 +34,11 @@ export const App: FC = () => (
       <Router>
         <Container>
           <Routes>
-            <Route path="heroes/*" element={<HeroesList />} />
             <Redirect from="/" to="heroes" />
+            <Route path="heroes/*" element={<HeroesList />}>
+              <Route path="add" element={<AddHero />} />
+              <Route path=":id" element={<HeroDetails />} />
+            </Route>
           </Routes>
         </Container>
       </Router>

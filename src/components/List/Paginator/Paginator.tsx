@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from '@emotion/styled';
 
-import { Button, ButtonColor } from 'components';
+import { Button, ButtonColor, ButtonVariant } from 'components';
 
 interface Props {
   onLoadMore: () => void;
@@ -20,7 +20,11 @@ const Container = styled.div`
 
 export const Paginator: FC<Props> = ({ onLoadMore }) => (
   <Container>
-    <Button color={ButtonColor.secondary} onClick={onLoadMore}>
+    <Button
+      color={ButtonColor.secondary}
+      variant={ButtonVariant.contained}
+      onClick={onLoadMore}
+    >
       Load more
     </Button>
   </Container>

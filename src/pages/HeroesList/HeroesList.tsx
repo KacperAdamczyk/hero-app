@@ -1,10 +1,9 @@
 /** @jsx jsx */
-import { Fragment, FC } from 'react';
+import { Fragment, FC, useCallback } from 'react';
 import { jsx, css } from '@emotion/core';
-import { Routes, Route } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 import { List, Layout } from 'components';
-import { AddHero } from 'pages';
 import { HEROES, Heroes_heroes, HeroesVariables } from 'api';
 import { ActionButtons } from './ActionButtons';
 import { HeroInfo } from './HeroInfo';
@@ -46,6 +45,9 @@ const mobileLayout: Layout<Heroes_heroes>[] = [
 ];
 
 export const HeroesList: FC = () => {
+  const navigate = useNavigate();
+  const onClick = useCallback(({ id }) => navigate(id), [navigate]);
+
   return (
     <Fragment>
       <ActionButtons
@@ -58,10 +60,9 @@ export const HeroesList: FC = () => {
         mobileLayout={mobileLayout}
         query={HEROES}
         dataField="heroes"
+        onClick={onClick}
       />
-      <Routes>
-        <Route path="add" element={<AddHero />} />
-      </Routes>
+      <Outlet />
     </Fragment>
   );
 };
