@@ -5,9 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 import { colors } from 'styling';
 import { Button, ButtonColor, ButtonVariant } from 'components';
+import { useSmallDevice } from 'hooks';
 
 export const NotFound: FC = () => {
   const navigate = useNavigate();
+  const isSmallDevice = useSmallDevice();
 
   const navigateHomepage = useCallback(() => navigate('/heroes'), [navigate]);
 
@@ -23,7 +25,7 @@ export const NotFound: FC = () => {
     >
       <div
         css={css`
-          font-size: 10em;
+          font-size: ${isSmallDevice ? 6 : 10}em;
           font-weight: bolder;
           color: ${colors.secondary};
         `}
@@ -34,6 +36,7 @@ export const NotFound: FC = () => {
         css={css`
           font-size: 2em;
           margin: 50px 0 30px;
+          text-align: center;
         `}
       >
         We can't find the page you're looking for.

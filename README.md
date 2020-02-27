@@ -1,6 +1,6 @@
 # Set up
 
-Install project dependencies
+Install project dependencies.
 
 ### `yarn`
 
