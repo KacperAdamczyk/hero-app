@@ -44,8 +44,12 @@ export const AddHero: FC = () => {
   const navigate = useNavigate();
   const onClose = useCallback(() => navigate('/heroes'), [navigate]);
   const onSubmit = useCallback(
-    values => addHero({ variables: values }).then(onClose, e => console.log(e)),
-    [addHero, onClose],
+    values =>
+      addHero({ variables: values }).then(
+        () => navigate('/heroes', { state: { refetch: true } }),
+        e => console.log(e),
+      ),
+    [addHero, navigate],
   );
 
   return (

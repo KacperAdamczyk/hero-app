@@ -91,6 +91,8 @@ export const List = <
         first: pageSize,
         skip: 0,
       } as Q);
+
+      setMorePages(true);
     }
   }, [refetch, shouldRefetch]);
 

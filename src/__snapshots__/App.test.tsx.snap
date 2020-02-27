@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders layout 1`] = `
+<div
+  class="css-7bpeju"
+>
+  <div
+    class="css-vzmcve-HeroesList"
+  >
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-contained css-1lu5or6-Button MuiButton-containedPrimary"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        <span
+          class="MuiButton-startIcon MuiButton-iconSizeMedium"
+        >
+          <svg
+            aria-hidden="true"
+            class="MuiSvgIcon-root"
+            focusable="false"
+            role="presentation"
+            viewBox="0 0 24 24"
+          >
+            <path
+              d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"
+            />
+          </svg>
+        </span>
+        Add a hero
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+  </div>
+  <div
+    class="css-cssveg"
+  >
+    <div
+      class="css-4c3f7w"
+    />
+    <div
+      class="css-1jw2zp1-Loader"
+      data-testid="loader"
+    >
+      <div
+        class="css-0"
+      >
+        <div
+          class="css-19ve4cl"
+        />
+        <div
+          class="css-4wm62s"
+        />
+        <div
+          class="css-19ve4cl"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;

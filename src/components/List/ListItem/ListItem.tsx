@@ -67,7 +67,7 @@ export const ListItem = <T,>({
   const onContainerClick = useCallback(() => onClick?.(data), [onClick, data]);
 
   return (
-    <Container onClick={onContainerClick}>
+    <Container data-testid="container" onClick={onContainerClick}>
       {layout.map(({ space, content }, index) => (
         <Cell key={index} space={space}>
           {content(data)}

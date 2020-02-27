@@ -52,7 +52,7 @@ export const HeroDetails: FC = () => {
   );
 
   const hero = data?.hero;
-
+  console.log('h', hero, id);
   return (
     <Modal isOpen onClose={onClose}>
       <ContentLoader loading={gettingHero} error={gettingHeroError?.message}>

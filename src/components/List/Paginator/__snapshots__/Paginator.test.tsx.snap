@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Paginator should fire an event on click 1`] = `
+<div
+  class="css-6duamk"
+>
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-contained css-1lu5or6-Button MuiButton-containedSecondary"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Load more
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+</div>
+`;

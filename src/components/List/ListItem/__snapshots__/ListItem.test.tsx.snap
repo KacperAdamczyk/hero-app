@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListItem should fire an event on click 1`] = `
+<div
+  class="css-1ttdpxg"
+  data-testid="container"
+/>
+`;

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input should display a value 1`] = `
+<div
+  class="css-1iyoj2o"
+>
+  <label
+    class="css-1o8lxzy"
+    for="input"
+  >
+    Input
+  </label>
+  <input
+    class="css-19e9lyz"
+    id="input"
+    name="input"
+    value="foo"
+  />
+</div>
+`;

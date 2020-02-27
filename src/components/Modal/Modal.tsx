@@ -8,8 +8,6 @@ import CloseRoundedIcon from '@material-ui/icons/CloseRounded';
 import { colors } from 'styling';
 import { useSmallDevice } from 'hooks';
 
-ReactModal.setAppElement('#root');
-
 interface Props {
   isOpen: boolean;
   header?: string;

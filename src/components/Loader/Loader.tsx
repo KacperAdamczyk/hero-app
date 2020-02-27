@@ -12,6 +12,7 @@ interface Props {
 
 export const Loader: FC<Props> = ({ loading = true, size = 15 }) => (
   <div
+    data-testid="loader"
     css={css`
       display: flex;
       justify-content: center;

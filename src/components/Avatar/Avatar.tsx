@@ -31,6 +31,7 @@ export const Avatar: FC<Props> = ({ url, size, alt = 'Avatar', className }) => {
     />
   ) : (
     <div
+      data-testid="avatar-placeholder"
       className={className}
       css={css`
         height: ${size}px;
