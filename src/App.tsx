@@ -8,10 +8,13 @@ import {
   Redirect,
 } from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
+import ReactModal from 'react-modal';
 
 import { colors, theme, media } from 'styling';
 import { client } from 'api';
-import { HeroesList, AddHero, HeroDetails } from 'pages';
+import { HeroesList, AddHero, HeroDetails, NotFound } from 'pages';
+
+ReactModal.setAppElement('#root');
 
 const Container = styled.div`
   background-color: ${colors.background};
@@ -39,6 +42,7 @@ export const App: FC = () => (
               <Route path="add" element={<AddHero />} />
               <Route path=":id" element={<HeroDetails />} />
             </Route>
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Container>
       </Router>
